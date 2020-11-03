@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as ROUTES from "./constants/router";
+import * as ROUTES from "./constants/routes";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Browse, Home, SignUp } from "./pages";
 import SignIn from "./pages/browse";
