@@ -2,8 +2,8 @@ import React from "react";
 
 import * as ROUTES from "./constants/routes";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Browse, Home, SignUp } from "./pages";
-import SignIn from "./pages/browse";
+import { Browse, Home, SignUp, SignIn } from "./pages";
+
 export default function App() {
   return (
     <Router>

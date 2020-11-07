@@ -1,12 +1,22 @@
-import React from 'react'
-import { render } from 'react-dom'
-import App from './app'
-import { GlobalStyles } from './global-styles'
-import 'normalize.css'
+import React from "react";
+import { render } from "react-dom";
+import App from "./app";
+import { GlobalStyles } from "./global-styles";
+import "normalize.css";
+import { FirebaseContext } from "./context/firebase";
+
+// eslint-disable-next-line no-unused-vars
+import { firebase } from "./lib/firebase.prod";
 
 render(
-    <> <GlobalStyles />
-        <App /></>, document.getElementById('root'))
+  <>
+    <FirebaseContext.Provider value={{ firebase }}>
+      <GlobalStyles />
+      <App />
+    </FirebaseContext.Provider>
+  </>,
+  document.getElementById("root")
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
