@@ -1,11 +1,12 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
+/* eslint-disable react/prop-types */
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
-export function isUserRedirect({ user, loggedInPath, children, ...rest }) {
+export function IsUserRedirect({ user, loggedInPath, children, ...rest }) {
   return (
     <Route
       {...rest}
-      reder={() => {
+      render={() => {
         if (!user) {
           return children;
         }
@@ -13,8 +14,34 @@ export function isUserRedirect({ user, loggedInPath, children, ...rest }) {
         if (user) {
           return (
             <Redirect
-              token={{
+              to={{
                 pathname: loggedInPath,
+              }}
+            />
+          );
+        }
+
+        return null;
+      }}
+    />
+  );
+}
+
+export function ProtectedRoute({ user, children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) => {
+        if (user) {
+          return children;
+        }
+
+        if (!user) {
+          return (
+            <Redirect
+              to={{
+                pathname: 'signin',
+                state: { from: location },
               }}
             />
           );
