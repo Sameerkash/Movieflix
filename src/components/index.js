@@ -1,6 +1,11 @@
-export { default as Jumbotron } from "./jumbotron/index";
-export { default as Footer } from "./footer/index";
-export { default as Accordion } from "./accordion/index";
-export { default as OptForm } from "./optform/index";
-export { default as Header } from "./header/index";
-export { default as Form } from "./form/index";
+export { default as Accordion } from './accordion';
+export { default as Card } from './card';
+export { default as Jumbotron } from './jumbotron';
+export { default as Feature } from './feature';
+export { default as OptForm } from './opt-form';
+export { default as Form } from './form';
+export { default as Profiles } from './profiles';
+export { default as Footer } from './footer';
+export { default as Header } from './header';
+export { default as Loading } from './loading';
+export { default as Player } from './player';

@@ -1,32 +1,33 @@
-import React, { useState, useContext } from "react";
-import { FooterContainer } from "../containers/footer";
-import { HeaderContainer } from "../containers/header";
-import { Form } from "../components";
-import { FirebaseContext } from "../context/firebase";
-import * as ROUTES from "../constants/routes";
-import { useHistory } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { FirebaseContext } from '../context/firebase';
+import { Form } from '../components';
+import { HeaderContainer } from '../containers/header';
+import { FooterContainer } from '../containers/footer';
+import * as ROUTES from '../constants/routes';
 
 export default function SignIn() {
-  const { firebase } = useContext(FirebaseContext);
   const history = useHistory();
-  const [emailAddress, setEmailAdress] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const { firebase } = useContext(FirebaseContext);
 
-  const isInvalid = password === "" || emailAddress === "";
-  const handleSignIn = (event) => {
+  const [emailAddress, setEmailAddress] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const isInvalid = password === '' || emailAddress === '';
+
+  const handleSignin = (event) => {
     event.preventDefault();
 
-    firebase
+    return firebase
       .auth()
       .signInWithEmailAndPassword(emailAddress, password)
       .then(() => {
-        // push
         history.push(ROUTES.BROWSE);
       })
       .catch((error) => {
-        setEmailAdress("");
-        setPassword("");
+        setEmailAddress('');
+        setPassword('');
         setError(error.message);
       });
   };
@@ -36,34 +37,32 @@ export default function SignIn() {
       <HeaderContainer>
         <Form>
           <Form.Title>Sign In</Form.Title>
-          {error && <Form.Error>{error}</Form.Error>}
-          <Form.Base onSubmit={handleSignIn} method="POST">
+          {error && <Form.Error data-testid="error">{error}</Form.Error>}
+
+          <Form.Base onSubmit={handleSignin} method="POST">
             <Form.Input
-              placeholder="Email adress "
+              placeholder="Email address"
               value={emailAddress}
-              onChange={({ target }) => setEmailAdress(target.value)}
-            ></Form.Input>
-
+              onChange={({ target }) => setEmailAddress(target.value)}
+            />
             <Form.Input
-              placeholder="Password"
-              autoComplete="off"
-              value={password}
               type="password"
+              value={password}
+              autoComplete="off"
+              placeholder="Password"
               onChange={({ target }) => setPassword(target.value)}
-            ></Form.Input>
-
-            <Form.Submit disabled={isInvalid} type="submit">
+            />
+            <Form.Submit disabled={isInvalid} type="submit" data-testid="sign-in">
               Sign In
             </Form.Submit>
-
-            <Form.Text>
-              New to MovieFlix? <Form.Link to="/signup">Sign Up Now</Form.Link>
-            </Form.Text>
-            <Form.TextSmall>
-              This page is protected by Google reCAPCTHA to ensure you are not a
-              bot. Learn More.
-            </Form.TextSmall>
           </Form.Base>
+
+          <Form.Text>
+            New to Netflix? <Form.Link to="/signup">Sign up now.</Form.Link>
+          </Form.Text>
+          <Form.TextSmall>
+            This page is protected by Google reCAPTCHA to ensure you&apos;re not a bot. Learn more.
+          </Form.TextSmall>
         </Form>
       </HeaderContainer>
       <FooterContainer />

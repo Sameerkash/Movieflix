@@ -1,15 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components/macro';
 
 export const Container = styled.div`
   display: flex;
-  padding: 70px 56px;
+  padding: 70px 0;
   margin: auto;
   max-width: 1000px;
-
   flex-direction: column;
 
   @media (max-width: 1000px) {
-    paddding: 70px 30px;
+    padding: 70px 30px;
   }
 `;
 
@@ -21,11 +20,11 @@ export const Column = styled.div`
 
 export const Row = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   grid-gap: 15px;
 
   @media (max-width: 1000px) {
-    grid-template-columns: reapeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 `;
 
@@ -33,7 +32,7 @@ export const Link = styled.a`
   color: #757575;
   margin-bottom: 20px;
   font-size: 13px;
-  text-direction: none;
+  text-decoration: none;
 `;
 
 export const Title = styled.p`
@@ -47,7 +46,8 @@ export const Text = styled.p`
   color: #757575;
   margin-bottom: 40px;
 `;
-export const Break = styled.p`
+
+export const Break = styled.div`
   flex-basis: 100%;
   height: 0;
 `;

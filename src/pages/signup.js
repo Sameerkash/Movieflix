@@ -1,43 +1,42 @@
-import React, { useState, useContext } from "react";
-import { HeaderContainer } from "../containers/header";
-import { Form } from "../components";
-import { FirebaseContext } from "../context/firebase";
-import * as ROUTES from "../constants/routes";
-import { useHistory } from "react-router-dom";
-import { FooterContainer } from "../containers/footer";
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { FirebaseContext } from '../context/firebase';
+import { Form } from '../components';
+import { HeaderContainer } from '../containers/header';
+import { FooterContainer } from '../containers/footer';
+import * as ROUTES from '../constants/routes';
 
 export default function SignUp() {
   const history = useHistory();
   const { firebase } = useContext(FirebaseContext);
 
-  const [firstName, setFirstName] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [emailAddress, setEmailAddress] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const [emailAddress, setEmailAdress] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const isInvalid = firstName === '' || password === '' || emailAddress === '';
 
-  const isInvalid = password === "" || emailAddress === "" || firstName === "";
-
-  const handleSignUp = (event) => {
+  const handleSignup = (event) => {
     event.preventDefault();
 
-    firebase
+    return firebase
       .auth()
       .createUserWithEmailAndPassword(emailAddress, password)
-      .then((result) => {
+      .then((result) =>
         result.user
           .updateProfile({
-            display: firstName,
+            displayName: firstName,
             photoURL: Math.floor(Math.random() * 5) + 1,
           })
           .then(() => {
             history.push(ROUTES.BROWSE);
-          });
-      })
+          })
+      )
       .catch((error) => {
-        setEmailAdress("");
-        setPassword("");
-        setFirstName("");
+        setFirstName('');
+        setEmailAddress('');
+        setPassword('');
         setError(error.message);
       });
   };
@@ -48,38 +47,36 @@ export default function SignUp() {
         <Form>
           <Form.Title>Sign Up</Form.Title>
           {error && <Form.Error>{error}</Form.Error>}
-          <Form.Base onSubmit={handleSignUp} method="POST">
+
+          <Form.Base onSubmit={handleSignup} method="POST">
             <Form.Input
-              placeholder="First Name"
+              placeholder="First name"
               value={firstName}
               onChange={({ target }) => setFirstName(target.value)}
             />
-
             <Form.Input
-              placeholder="Email Adress"
+              placeholder="Email address"
               value={emailAddress}
-              onChange={({ target }) => setEmailAdress(target.value)}
+              onChange={({ target }) => setEmailAddress(target.value)}
             />
-
             <Form.Input
               type="password"
-              placeholder="Password"
               value={password}
+              autoComplete="off"
+              placeholder="Password"
               onChange={({ target }) => setPassword(target.value)}
             />
-
-            <Form.Submit disabled={isInvalid} type="submit">
+            <Form.Submit disabled={isInvalid} type="submit" data-testid="sign-up">
               Sign Up
             </Form.Submit>
-
-            <Form.Text>
-              Already a user? <Form.Link to="/signin">Sign In Now</Form.Link>
-            </Form.Text>
-            <Form.TextSmall>
-              This page is protected by Google reCAPCTHA to ensure you are not a
-              bot. Learn More.
-            </Form.TextSmall>
           </Form.Base>
+
+          <Form.Text>
+            Already a user? <Form.Link to="/signin">Sign in now.</Form.Link>
+          </Form.Text>
+          <Form.TextSmall>
+            This page is protected by Google reCAPTCHA to ensure you&apos;re not a bot. Learn more.
+          </Form.TextSmall>
         </Form>
       </HeaderContainer>
       <FooterContainer />

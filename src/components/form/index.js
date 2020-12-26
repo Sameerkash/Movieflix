@@ -1,16 +1,5 @@
-/* eslint-disable react/prop-types */
-import React from "react";
-import {
-  Container,
-  Error,
-  Title,
-  Text,
-  Base,
-  TextSmall,
-  Link,
-  Input,
-  Submit,
-} from "./styles/form";
+import React from 'react';
+import { Container, Error, Base, Title, Text, TextSmall, Link, Input, Submit } from './styles/form';
 
 export default function Form({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
@@ -25,7 +14,7 @@ Form.Base = function FormBase({ children, ...restProps }) {
 };
 
 Form.Title = function FormTitle({ children, ...restProps }) {
-  return <Title {...restProps}> {children}</Title>;
+  return <Title {...restProps}>{children}</Title>;
 };
 
 Form.Text = function FormText({ children, ...restProps }) {

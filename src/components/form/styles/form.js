@@ -1,6 +1,5 @@
-import styled from "styled-components/macro";
-
-import { Link as ReactRouterLink } from "react-router-dom";
+import styled from 'styled-components/macro';
+import { Link as ReachRouterLink } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
@@ -8,7 +7,6 @@ export const Container = styled.div`
   min-height: 660px;
   background-color: rgba(0, 0, 0, 0.75);
   border-radius: 5px;
-  box-sizing: border-box;
   width: 100%;
   margin: auto;
   max-width: 450px;
@@ -19,7 +17,7 @@ export const Container = styled.div`
 export const Error = styled.div`
   background: #e87c03;
   border-radius: 4px;
-  font-szie: 14px;
+  font-size: 14px;
   margin: 0 0 16px;
   color: white;
   padding: 15px 20px;
@@ -52,8 +50,8 @@ export const TextSmall = styled.p`
   color: #8c8c8c;
 `;
 
-export const Link = styled(ReactRouterLink)`
-  color: white;
+export const Link = styled(ReachRouterLink)`
+  color: #fff;
   text-decoration: none;
 
   &:hover {
@@ -65,7 +63,7 @@ export const Input = styled.input`
   background: #333;
   border-radius: 4px;
   border: 0;
-  color: white;
+  color: #fff;
   height: 50px;
   line-height: 50px;
   padding: 5px 20px;
